@@ -15,4 +15,4 @@ var a = 1, b = "Vitor", c = true;
 var a = 1;
 var A = 4;
 
-// Both variables above are read and interpreted as deifferent variables by JavaScript
+// Both variables above are read and interpreted as different variables by JavaScript
