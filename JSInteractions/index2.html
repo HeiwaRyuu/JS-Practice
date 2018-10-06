@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style> 
+            body {
+                background-color: lightgray;
+            }
+            h1 {
+                color: darkblue;
+                font-variant: small-caps;
+            }
+            p {
+                font-size: 120%;
+                color: dimgray;
+            }
+            p.centertext {
+                font-style: oblique;
+                text-align: center;
+            }
+            .center {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            a {
+                text-decoration: none;
+            }
+            a:link {
+                color: gray;
+            }
+            a:visited {
+                color: green;
+            }
+            a:hover {
+                color: rebeccapurple;
+                text-decoration: underline;
+            }
+            a:active {
+                color: teal;
+            }
+            div.figcaption {
+                font-size:80%;
+                text-align: center;
+                color: dimgray;
+                display: block;
+                width: 200px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        </style>
+        <script>
+        function decide() {
+            var x1 = Number(document.getElementById("txtx1").value);
+            var x2 = Number(document.getElementById("txtx2").value);
+            if (x1 > x2) {
+                document.getElementById("resposta1").innerHTML = x1 + " é maior do que " + x2;
+            } else if (x1 < x2) {
+                document.getElementById("resposta1").innerHTML = x1 + " é menor do que " + x2;
+            } else {
+                document.getElementById("resposta1").innerHTML = x1 + " é igual a " + x2;
+            }
+        }
+        function itera() {
+            var txt = document.getElementById("txttxt").value;
+            var vezes = Number(document.getElementById("txtvezes").value);
+            var msg = "";
+            for (var i = 0; i < vezes; i++)
+                msg += txt + "<br>";
+            document.getElementById("resposta2").innerHTML = msg;
+        }
+
+        function busca_binaria(vetor, valor, offset=0) {
+            meio = Math.floor(vetor.length/2);
+            if (valor < vetor[meio]) {
+                busca_binaria(vetor.slice(0, meio), valor, offset);
+            } else if (valor > vetor[meio]) {
+                busca_binaria(vetor.slice(meio+1), valor, offset + meio + 1);
+            } else if (valor == vetor[meio]){
+                document.getElementById("resposta3").innerHTML = "índice: " + (offset + meio);
+            }
+                else{
+                return naoEncontrado;
+            }
+        }
+
+        function prepara() {
+                var vetor = document.getElementById("txtvetor").value.split(",").map(Number);
+                var valor = Number(document.getElementById("txtvalor").value);
+                var naoEncontrado = document.getElementById("resposta3").innerHTML = "Valor não encontrado!";
+                busca_binaria(vetor, valor);
+            }
+
+        </script>
+    </head>
+    <body>
+        <hr>
+        <!-- Decisão -->
+        <p>X1: <input type="text" id="txtx1"></p>
+        <p>X2: <input type="text" id="txtx2"></p>
+        <button onclick="decide()">Maior</button>
+        <p id="resposta1"></p>
+        <hr>
+        <!-- Iteração -->
+        <p>Texto: <input type="text" id="txttxt"></p>
+        <p>Vezes: <input type="text" id="txtvezes"></p>
+        <button onclick="itera()">Imprime em vezes</button>
+        <p id="resposta2"></p>
+        <hr>
+        <!-- Busca binária -->
+        <p>Vetor: <input type="text" id="txtvetor"></p>
+        <p>Valor: <input type="text" id="txtvalor"></p>
+        <button onclick="prepara()">Busca binária</button>
+        <p id="resposta3"></p>
+        <hr>
+    </body>
+</html>
